@@ -1,11 +1,10 @@
 # Clash及订阅转换配置文件
 
 ## 自定义 YAML配置文件
-https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Clash_Max.yaml
-YAML配置文件修改自[深巷有喵]  
-(https://raw.githubusercontent.com/Rabbit-Spec/Clash/Master/Yaml/Clash_Max.yaml)
+https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Clash_Max.yaml  
+YAML配置文件修改自[深巷有喵](https://raw.githubusercontent.com/Rabbit-Spec/Clash/Master/Yaml/Clash_Max.yaml)
 
-## 自定义 订阅转换 配置转换 规则转换 的远程配置：
+## 自定义 订阅转换 配置转换 规则转换 的远程配置
 https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/ACL4SSR_Online_Full_Modify.ini  
 订阅转换配置修改自
 [ACL4SSR](https://git.moezx.cc/mashiro/ACL4SSR/raw/branch/master/Clash/config/ACL4SSR_Online_Full.ini)与[zsokami](https://raw.githubusercontent.com/zsokami/ACL4SSR/main/ACL4SSR_Online_Full_Mannix.ini)
