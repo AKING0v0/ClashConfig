@@ -1,7 +1,7 @@
 # Clash及订阅转换配置文件
 
 ## 自定义 YAML配置文件
-https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Clash_Max.yaml  
+https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Clash_Config.yaml  
 YAML配置文件修改自[深巷有喵](https://raw.githubusercontent.com/Rabbit-Spec/Clash/Master/Yaml/Clash_Max.yaml)
 
 ## 自定义 订阅转换 配置转换 规则转换 的远程配置
