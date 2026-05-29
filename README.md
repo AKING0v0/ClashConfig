@@ -1,16 +1,16 @@
+# Clash及订阅转换配置文件
 
-## ACL4SSR_Online_Full_Modify
-
-# 自定义 YAML配置文件
+## 自定义 YAML配置文件
 https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Clash_Max.yaml
-YAML配置文件修改自[深巷有喵](https://raw.githubusercontent.com/Rabbit-Spec/Clash/Master/Yaml/Clash_Max.yaml)
+YAML配置文件修改自[深巷有喵]  
+(https://raw.githubusercontent.com/Rabbit-Spec/Clash/Master/Yaml/Clash_Max.yaml)
 
-# 自定义 订阅转换 配置转换 规则转换 的远程配置：
-https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/ACL4SSR_Online_Full_Modify.ini
+## 自定义 订阅转换 配置转换 规则转换 的远程配置：
+https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/ACL4SSR_Online_Full_Modify.ini  
 订阅转换配置修改自
 [ACL4SSR](https://git.moezx.cc/mashiro/ACL4SSR/raw/branch/master/Clash/config/ACL4SSR_Online_Full.ini)与[zsokami](https://raw.githubusercontent.com/zsokami/ACL4SSR/main/ACL4SSR_Online_Full_Mannix.ini)
 
-# 补充说明
+## 补充说明
 由于ACL4SSR规则停更，所以替换了一部分[ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)规则。
 
 移除
