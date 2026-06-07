@@ -127,14 +127,17 @@ proxy-providers:
     <<: *NodeParam
     path: './proxy_provider/Providers_2.yaml'
 
-# 锚点 - 提取自 INI 的正则筛选
+# 锚点
 # 地区筛选正则
-FilterHK: &FilterHK '(🇭🇰|港|HK|hk|Hong Kong|HongKong|hongkong)'
-FilterJP: &FilterJP '(🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan)'
-FilterSG: &FilterSG '(🇸🇬|新加坡|狮|狮城|SG|Singapore)'
-FilterTW: &FilterTW '(🇹🇼|台|新北|彰化|TW|Taiwan)'
-FilterUS: &FilterUS '(🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|USA|United States)'
-FilterKR: &FilterKR '(🇰🇷|KR|Korea|KOR|首尔|韩|韓)'
+FilterAI: &FilterAI "(?i)(🇯🇵|🇸🇬|🇹🇼|🇰🇷|🇺🇸|日本|东京|大阪|新加坡|狮|台湾|韩国|韓|首尔|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|SG|SGP|Singapore|TW|TWN|Tai|Taiwan|KR|KOR|Korea|US|USA|United States)\\d*\\b)"
+FilterTikTok: &FilterTikTok "(?i)(🇯🇵|🇸🇬|🇹🇼|🇰🇷|🇺🇸|日本|东京|大阪|新加坡|狮|台湾|韩国|韓|首尔|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|SG|SGP|Singapore|TW|TWN|Tai|Taiwan|KR|KOR|Korea|US|USA|United States)\\d*\\b)"
+FilterHK: &FilterHK "^(?=.*(?i)(🇭🇰|香港|\\b(HK|HKG|Hong)\\d*\\b))(?!.*(?i)(0\\.\\d+|1\\.[1-9]\\d*|[2-9](\\.\\d+)?|\\d{2,})[xX倍]).*$"
+FilterJP: &FilterJP "(?i)(🇯🇵|日本|东京|大阪|\\b(JP|JPN|Japan)\\d*\\b)"
+FilterTW: &FilterTW "(?i)(🇹🇼|台湾|\\b(TW|TWN|Tai|Taiwan)\\d*\\b)"
+FilterKR: &FilterKR "(?i)(🇰🇷|韩国|韓|首尔|\\b(KR|KOR|Korea)\\d*\\b)"
+FilterSG: &FilterSG "(?i)(🇸🇬|新加坡|狮|\\b(SG|SGP|Singapore)\\d*\\b)"
+FilterUS: &FilterUS "(?i)(🇺🇸|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(US|USA|United States)\\d*\\b)"
+FilterGlobal: &FilterGlobal "^(?!.*(?i)(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|\\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)\\d*\\b|\\d{4}-\\d{2}-\\d{2}|\\dG)).*$"
 
 # 自动测速组参数 (url-test)
 AutoTest: &AutoTest {type: url-test, url: 'http://www.gstatic.com/generate_204', interval: 120, tolerance: 60}
@@ -142,15 +145,22 @@ AutoTest: &AutoTest {type: url-test, url: 'http://www.gstatic.com/generate_204',
 proxy-groups:
   - name: ✈️ 起飞选择
     type: select
-    proxies: [⚡ 最低延迟, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+    proxies: [♻️ 故障转移, ⚡ 最低延迟, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
   - name: 🐟 漏网之鱼
     type: select
     proxies: [✈️ 起飞选择, DIRECT, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
+  - name: ♻️ 故障转移
+    type: fallback
+    url: 'http://www.gstatic.com/generate_204'
+    interval: 120
+    tolerance: 60
+    proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点]
+
   - name: 👆🏻 手动切换
     type: select
-    proxies: [🌏 全球节点]
+    proxies: [🌏 其他国家]
     use: *AllProviderList
     filter: '.*'
 
@@ -158,19 +168,29 @@ proxy-groups:
     <<: *AutoTest
     use: *AllProviderList
     # 逻辑：匹配任意字符，且不包含排除关键字
-    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
+    filter: *FilterGlobal
 
   - name: 💬 Ai平台
     type: select
-    proxies: [🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
-
-  - name: 📺 哔哩哔哩
-    type: select
-    proxies: [DIRECT, 🇭🇰 香港节点, 🇨🇳 台湾节点]
+    proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点]
 
   - name: 📹 油管视频
     type: select
     proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+
+  - name: 🎵 TikTok
+    type: select
+    proxies: [✈️ 起飞选择]
+    use: *AllProviderList
+    filter: *FilterTikTok
+
+  - name: 📲 电报消息
+    type: select
+    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+
+  - name: 📺 哔哩哔哩
+    type: select
+    proxies: [DIRECT, 🇭🇰 香港节点, 🇨🇳 台湾节点]
 
   - name: 🎓 学术平台
     type: select
@@ -180,15 +200,19 @@ proxy-groups:
     type: select
     proxies: [DIRECT, 👆🏻 手动切换]
 
+  - name: 🍎 苹果服务
+    type: select
+    proxies: [DIRECT, 👆🏻 手动切换]
+
   - name: 🎯 全球直连
     type: select
     proxies: [DIRECT, 👆🏻 手动切换]
 
-  - name: 🌏 全球节点
+  - name: 🌏 其他国家
     type: select
     use: *AllProviderList
-    # 逻辑：排除CN,HK,TW,SG,JP,US,KR，且排除垃圾关键字
-    filter: '^(?=.*.)(?!.*(🇨🇳|🇭🇰|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇰🇷))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
+    # 逻辑：排除CN,HK,TW,SG,JP,US,KR
+    filter: '^(?!.*(?i)(🇨🇳|🇭🇰|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇰🇷|中国|香港|台湾|新加坡|狮|日本|东京|大阪|美国|洛杉矶|圣何塞|西雅图|波特兰|韩国|韓|首尔|\b(CN|China|HK|HKG|Hong|TW|TWN|Tai|Taiwan|SG|SGP|Singapore|JP|JPN|Japan|US|USA|United States|KR|KOR|Korea)\d*\b)).*$'
 
   - name: 🇭🇰 香港节点
     <<: *AutoTest
@@ -220,15 +244,70 @@ proxy-groups:
     use: *AllProviderList
     filter: *FilterUS
  
-# 规则集定义 (提取自 INI 中的 URL)
+# 规则集定义
 # 注意：由于源是 .list 格式，behavior 设为 classical
 RuleSetClassical: &RuleSetClassical {type: http, behavior: classical, interval: 86400, format: text}
 
 rule-providers:
-  Lan:
+ AiSuite:
     <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.list
-    path: ./ruleset/Lan.list
+    url: https://raw.githubusercontent.com/dler-io/Rules/refs/heads/main/Surge/Surge%203/Provider/AI%20Suite.list
+    path: ./ruleset/AiSuite.list
+
+  Google:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.list
+    path: ./ruleset/Google.list
+
+  GitHub:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub.list
+    path: ./ruleset/GitHub.list
+
+  Telegram:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list
+    path: ./ruleset/Telegram.list
+
+  YouTube:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.list
+    path: ./ruleset/YouTube.list
+
+  TikTok:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/TikTok/TikTok.list
+    path: ./ruleset/TikTok.list
+
+  BiliBiliHMT:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list
+    path: ./ruleset/BiliBiliHMT.list
+  
+  BiliBiliBM:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/BiliBili/BiliBili.list
+    path: ./ruleset/BiliBiliBM.list
+
+  Proxy:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Proxy/Proxy.list
+    path: ./ruleset/Proxy.list
+
+  Microsoft:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list
+    path: ./ruleset/Microsoft.list
+
+  Apple:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple.list
+    path: ./ruleset/Apple.list
+
+  Scholar:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Scholar/Scholar.list
+    path: ./ruleset/Scholar.list
 
   Download:
     <<: *RuleSetClassical
@@ -245,91 +324,52 @@ rule-providers:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list
     path: ./ruleset/SteamCN.list
 
-  AiSuite:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/dler-io/Rules/refs/heads/main/Surge/Surge%203/Provider/AI%20Suite.list
-    path: ./ruleset/AiSuite.list
-
-  YouTube:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.list
-    path: ./ruleset/YouTube.list
-
-  BiliBiliHMT:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list
-    path: ./ruleset/BiliBiliHMT.list
-  
-  BiliBiliBM:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/BiliBili/BiliBili.list
-    path: ./ruleset/BiliBiliBM.list
-
-  Microsoft:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list
-    path: ./ruleset/Microsoft.list
-
-  GitHub:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub.list
-    path: ./ruleset/GitHub.list
-
-  Proxy:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Proxy/Proxy.list
-    path: ./ruleset/Proxy.list
-
-  Scholar:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Scholar/Scholar.list
-    path: ./ruleset/Scholar.list
-
-  Direct:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Direct/Direct.list
-    path: ./ruleset/Direct.list
-
   China:
     <<: *RuleSetClassical
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/China/China.list
     path: ./ruleset/China.list
 
+  Direct:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Direct/Direct.list
+    path: ./ruleset/Direct.list
+  Lan:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.list
+    path: ./ruleset/Lan.list
 
-
-# 规则部分：完全按照 INI 逻辑排序
 rules:
-  # 🎯 全球直连 - 局域网与直连列表
+  # 局域网及个人最高优先级覆盖（必须放在最前）
   - RULE-SET,Lan,🎯 全球直连
+
+  # 境内高频下载与特例服务直连（防止被后续的 Proxy 规则捕获）
   - RULE-SET,Download,🎯 全球直连
-  
-  # 🎯 全球直连 - GoogleCN & SteamCN
   - RULE-SET,GoogleCN,🎯 全球直连
   - RULE-SET,SteamCN,🎯 全球直连
-  
-  # 💬 Ai平台
+
+  # 指定服务及平台精准分流（必须放在 Proxy 泛用规则之前）
   - RULE-SET,AiSuite,💬 Ai平台
-  
-  # 📹 油管视频
+  - RULE-SET,Google,✈️ 起飞选择
+  - RULE-SET,GitHub,✈️ 起飞选择
+  - RULE-SET,Telegram,📲 电报消息
   - RULE-SET,YouTube,📹 油管视频
-  
-  # 📺 哔哩哔哩 (合并了 INI 中的两条规则)
+  - RULE-SET,TikTok,🎵 TikTok
+
+  # 哔哩哔哩分流
   - RULE-SET,BiliBiliHMT,📺 哔哩哔哩
   - RULE-SET,BiliBiliBM,📺 哔哩哔哩
-  
-  # 🪟 微软服务
-  - RULE-SET,Microsoft,🪟 微软服务
-  
-  # ✈️ 起飞选择 - GitHub & Proxy
-  - RULE-SET,GitHub,✈️ 起飞选择
+
+  # 广泛的代理规则兜底
   - RULE-SET,Proxy,✈️ 起飞选择
   
-  # 🎓 学术平台
-  - RULE-SET,Scholar,🎓 学术平台
+  - RULE-SET,Microsoft,🪟 微软服务
+  - RULE-SET,Apple,🍎 苹果服务
   
-  # 🎯 全球直连 - 国内域名、公司IP、下载
-  - RULE-SET,Direct,🎯 全球直连
+  - RULE-SET,Scholar,🎓 学术平台
+
+  # 中国大陆域名及直连兜底
   - RULE-SET,China,🎯 全球直连
+  - RULE-SET,Direct,🎯 全球直连
   
   # 🎯 全球直连 - GEOIP CN
   - GEOIP,CN,🎯 全球直连
