@@ -249,10 +249,40 @@ proxy-groups:
 RuleSetClassical: &RuleSetClassical {type: http, behavior: classical, interval: 86400, format: text}
 
 rule-providers:
- AiSuite:
+  Lan:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.list
+    path: ./ruleset/Lan.list
+
+  Download:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Download/Download.list
+    path: ./ruleset/Download.list
+
+  GoogleCN:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
+    path: ./ruleset/GoogleCN.list
+
+  SteamCN:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list
+    path: ./ruleset/SteamCN.list
+
+  AiSuite:
     <<: *RuleSetClassical
     url: https://raw.githubusercontent.com/dler-io/Rules/refs/heads/main/Surge/Surge%203/Provider/AI%20Suite.list
     path: ./ruleset/AiSuite.list
+
+  Microsoft:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list
+    path: ./ruleset/Microsoft.list
+
+  Apple:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple.list
+    path: ./ruleset/Apple.list
 
   Google:
     <<: *RuleSetClassical
@@ -294,35 +324,10 @@ rule-providers:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Proxy/Proxy.list
     path: ./ruleset/Proxy.list
 
-  Microsoft:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list
-    path: ./ruleset/Microsoft.list
-
-  Apple:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple.list
-    path: ./ruleset/Apple.list
-
   Scholar:
     <<: *RuleSetClassical
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Scholar/Scholar.list
     path: ./ruleset/Scholar.list
-
-  Download:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Download/Download.list
-    path: ./ruleset/Download.list
-
-  GoogleCN:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
-    path: ./ruleset/GoogleCN.list
-
-  SteamCN:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list
-    path: ./ruleset/SteamCN.list
 
   China:
     <<: *RuleSetClassical
@@ -333,10 +338,6 @@ rule-providers:
     <<: *RuleSetClassical
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Direct/Direct.list
     path: ./ruleset/Direct.list
-  Lan:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.list
-    path: ./ruleset/Lan.list
 
 rules:
   # 局域网及个人最高优先级覆盖（必须放在最前）
@@ -349,6 +350,8 @@ rules:
 
   # 指定服务及平台精准分流（必须放在 Proxy 泛用规则之前）
   - RULE-SET,AiSuite,💬 Ai平台
+  - RULE-SET,Microsoft,🪟 微软服务
+  - RULE-SET,Apple,🍎 苹果服务
   - RULE-SET,Google,✈️ 起飞选择
   - RULE-SET,GitHub,✈️ 起飞选择
   - RULE-SET,Telegram,📲 电报消息
@@ -361,9 +364,6 @@ rules:
 
   # 广泛的代理规则兜底
   - RULE-SET,Proxy,✈️ 起飞选择
-  
-  - RULE-SET,Microsoft,🪟 微软服务
-  - RULE-SET,Apple,🍎 苹果服务
   
   - RULE-SET,Scholar,🎓 学术平台
 
