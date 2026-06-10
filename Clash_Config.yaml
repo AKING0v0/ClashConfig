@@ -329,15 +329,15 @@ rule-providers:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Scholar/Scholar.list
     path: ./ruleset/Scholar.list
 
-  China:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/China/China.list
-    path: ./ruleset/China.list
-
   Direct:
     <<: *RuleSetClassical
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Direct/Direct.list
     path: ./ruleset/Direct.list
+
+  China:
+    <<: *RuleSetClassical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/China/China.list
+    path: ./ruleset/China.list
 
 rules:
   # 局域网及个人最高优先级覆盖（必须放在最前）
@@ -360,7 +360,7 @@ rules:
 
   # 哔哩哔哩分流
   - RULE-SET,BiliBiliHMT,📺 哔哩哔哩
-  - RULE-SET,BiliBiliBM,📺 哔哩哔哩
+  - RULE-SET,BiliBiliBM,🎯 全球直连
 
   # 广泛的代理规则兜底
   - RULE-SET,Proxy,✈️ 起飞选择
@@ -368,9 +368,9 @@ rules:
   - RULE-SET,Scholar,🎓 学术平台
 
   # 中国大陆域名及直连兜底
-  - RULE-SET,China,🎯 全球直连
   - RULE-SET,Direct,🎯 全球直连
-  
+  - RULE-SET,China,🎯 全球直连
+
   # 🎯 全球直连 - GEOIP CN
   - GEOIP,CN,🎯 全球直连
   
