@@ -116,7 +116,7 @@ FilterKR: &FilterKR "(?i)(🇰🇷|韩国|韓|首尔|\\b(KR|KOR|Korea)\\d*\\b)"
 FilterSG: &FilterSG "(?i)(🇸🇬|新加坡|狮|\\b(SG|SGP|Singapore)\\d*\\b)"
 FilterUS: &FilterUS "(?i)(🇺🇸|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(US|USA|United States)\\d*\\b)"
 
-AutoTest: &AutoTest {type: url-test, url: 'http://www.gstatic.com/generate_204', interval: 120, tolerance: 60}
+AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 300, tolerance: 60}
 
 proxy-groups:
   - name: ✈️ 起飞选择
