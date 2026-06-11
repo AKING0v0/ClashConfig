@@ -110,7 +110,7 @@ dns:
     - https://1.1.1.1/dns-query
 
 # 锚点 - 节点订阅的参数
-NodeParam: &NodeParam {type: http, interval: 21600, health-check: {enable: true, url: 'http://www.gstatic.com/generate_204', interval: 120}}
+NodeParam: &NodeParam {type: http, interval: 21600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}}
 
 # 【新增】锚点 - 全局机场名单 (在这里管理所有机场的名字)
 # 以后有新机场，只需要在这里加上名字，并在下方 proxy-providers 添加对应配置即可
@@ -139,7 +139,7 @@ FilterUS: &FilterUS "(?i)(🇺🇸|美国|洛杉矶|旧金山|圣何塞|西雅�
 FilterGlobal: &FilterGlobal "^(?!.*(?i)(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|\\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)\\d*\\b|\\d{4}-\\d{2}-\\d{2}|\\dG)).*$"
 
 # 自动测速组参数 (url-test)
-AutoTest: &AutoTest {type: url-test, url: 'http://www.gstatic.com/generate_204', interval: 120, tolerance: 60}
+AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 300, tolerance: 60}
 
 proxy-groups:
   - name: ✈️ 起飞选择
@@ -152,8 +152,8 @@ proxy-groups:
 
   - name: ♻️ 故障转移
     type: fallback
-    url: 'http://www.gstatic.com/generate_204'
-    interval: 120
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
     tolerance: 60
     proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点]
 
