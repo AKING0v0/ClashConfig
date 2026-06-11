@@ -1,4 +1,4 @@
-# AKING0v0的「Clash_Config」配置
+# AKING0v0的「Clash_Config」Mihomo覆写配置
 # 现配置作者：https://github.com/AKING0v0
 # 原配置作者：https://github.com/Rabbit-Spec
 # 核心设置保留原版 Clash_Max，策略与规则修改自 ACL4SSR
@@ -7,8 +7,8 @@
 port: 7890
 socks-port: 7891
 mixed-port: 7892
-redir-port: 7893
-tproxy-port: 7894
+# redir-port: 7893
+# tproxy-port: 7894
 
 unified-delay: true
 geodata-mode: true
@@ -95,101 +95,60 @@ dns:
     - '+.stun.*'
     - '+.stun.*.*'
     - '+.stun.*.*.*'
-
-  default-nameserver:
+  
+default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
 
-  nameserver-policy:
+nameserver-policy:
     'geosite:cn,private':
       - https://223.5.5.5/dns-query
       - https://223.6.6.6/dns-query
 
-  nameserver:
+nameserver:
     - https://8.8.8.8/dns-query
     - https://1.1.1.1/dns-query
 
-# 锚点 - 节点订阅的参数
-NodeParam: &NodeParam {type: http, interval: 21600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}}
-
-# 【新增】锚点 - 全局机场名单 (在这里管理所有机场的名字)
-# 以后有新机场，只需要在这里加上名字，并在下方 proxy-providers 添加对应配置即可
-AllProviderList: &AllProviderList [机场订阅1,机场订阅2]
-
-proxy-providers: 
-  机场订阅1:
-    url: '机场订阅链接1'
-    <<: *NodeParam
-    path: './proxy_provider/Providers_1.yaml'
-  机场订阅2:
-    url: '机场订阅链接2'
-    <<: *NodeParam
-    path: './proxy_provider/Providers_2.yaml'
-
-# 锚点
-# 地区筛选正则
-FilterAI: &FilterAI "(?i)(🇯🇵|🇸🇬|🇹🇼|🇰🇷|🇺🇸|日本|东京|大阪|新加坡|狮|台湾|韩国|韓|首尔|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|SG|SGP|Singapore|TW|TWN|Tai|Taiwan|KR|KOR|Korea|US|USA|United States)\\d*\\b)"
-FilterTikTok: &FilterTikTok "(?i)(🇯🇵|🇸🇬|🇹🇼|🇰🇷|🇺🇸|日本|东京|大阪|新加坡|狮|台湾|韩国|韓|首尔|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|SG|SGP|Singapore|TW|TWN|Tai|Taiwan|KR|KOR|Korea|US|USA|United States)\\d*\\b)"
 FilterHK: &FilterHK "^(?=.*(?i)(🇭🇰|香港|\\b(HK|HKG|Hong)\\d*\\b))(?!.*(?i)(0\\.\\d+|1\\.[1-9]\\d*|[2-9](\\.\\d+)?|\\d{2,})[xX倍]).*$"
 FilterJP: &FilterJP "(?i)(🇯🇵|日本|东京|大阪|\\b(JP|JPN|Japan)\\d*\\b)"
 FilterTW: &FilterTW "(?i)(🇹🇼|台湾|\\b(TW|TWN|Tai|Taiwan)\\d*\\b)"
 FilterKR: &FilterKR "(?i)(🇰🇷|韩国|韓|首尔|\\b(KR|KOR|Korea)\\d*\\b)"
 FilterSG: &FilterSG "(?i)(🇸🇬|新加坡|狮|\\b(SG|SGP|Singapore)\\d*\\b)"
 FilterUS: &FilterUS "(?i)(🇺🇸|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(US|USA|United States)\\d*\\b)"
-FilterGlobal: &FilterGlobal "^(?!.*(?i)(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|\\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)\\d*\\b|\\d{4}-\\d{2}-\\d{2}|\\dG)).*$"
 
-# 自动测速组参数 (url-test)
-AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 300, tolerance: 60}
+AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 120, tolerance: 60}
 
 proxy-groups:
   - name: ✈️ 起飞选择
     type: select
-    proxies: [♻️ 故障转移, ⚡ 最低延迟, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+    proxies: [⚡ 最低延迟, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
   - name: 🐟 漏网之鱼
     type: select
     proxies: [✈️ 起飞选择, DIRECT, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
-  - name: ♻️ 故障转移
-    type: fallback
-    url: 'https://www.gstatic.com/generate_204'
-    interval: 300
-    tolerance: 60
-    proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点]
-
   - name: 👆🏻 手动切换
     type: select
-    proxies: [🌏 其他国家]
-    use: *AllProviderList
+    proxies: [🌏 全球节点]
+    include-all: true
     filter: '.*'
 
   - name: ⚡ 最低延迟
     <<: *AutoTest
-    use: *AllProviderList
-    # 逻辑：匹配任意字符，且不包含排除关键字
-    filter: *FilterGlobal
+    include-all: true
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
 
   - name: 💬 Ai平台
     type: select
     proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点, 🇸🇬 狮城节点, 🇺🇲 美国节点]
 
-  - name: 📹 油管视频
-    type: select
-    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
-
-  - name: 🎵 TikTok
-    type: select
-    proxies: [✈️ 起飞选择]
-    use: *AllProviderList
-    filter: *FilterTikTok
-
-  - name: 📲 电报消息
-    type: select
-    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
-
   - name: 📺 哔哩哔哩
     type: select
     proxies: [DIRECT, 🇭🇰 香港节点, 🇨🇳 台湾节点]
+
+  - name: 📹 油管视频
+    type: select
+    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
 
   - name: 🎓 学术平台
     type: select
@@ -199,52 +158,45 @@ proxy-groups:
     type: select
     proxies: [DIRECT, ✈️ 起飞选择]
 
-  - name: 🍎 苹果服务
-    type: select
-    proxies: [DIRECT, ✈️ 起飞选择]
-
   - name: 🎯 全球直连
     type: select
     proxies: [DIRECT, ✈️ 起飞选择]
 
-  - name: 🌏 其他国家
+  - name: 🌏 全球节点
     type: select
-    use: *AllProviderList
-    # 逻辑：排除CN,HK,TW,SG,JP,US,KR
+    include-all: true
     filter: '^(?!.*(?i)(🇨🇳|🇭🇰|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇰🇷|中国|香港|台湾|新加坡|狮|日本|东京|大阪|美国|洛杉矶|圣何塞|西雅图|波特兰|韩国|韓|首尔|\b(CN|China|HK|HKG|Hong|TW|TWN|Tai|Taiwan|SG|SGP|Singapore|JP|JPN|Japan|US|USA|United States|KR|KOR|Korea)\d*\b)).*$'
 
   - name: 🇭🇰 香港节点
     <<: *AutoTest
-    use: *AllProviderList
+    include-all: true
     filter: *FilterHK
   
   - name: 🇯🇵 日本节点
     <<: *AutoTest
-    use: *AllProviderList
+    include-all: true
     filter: *FilterJP
 
   - name: 🇨🇳 台湾节点
     <<: *AutoTest
-    use: *AllProviderList
+    include-all: true
     filter: *FilterTW
 
   - name: 🇰🇷 韩国节点
     <<: *AutoTest
-    use: *AllProviderList
+    include-all: true
     filter: *FilterKR
   
   - name: 🇸🇬 狮城节点
     <<: *AutoTest
-    use: *AllProviderList
+    include-all: true
     filter: *FilterSG
   
   - name: 🇺🇲 美国节点
     <<: *AutoTest
-    use: *AllProviderList
+    include-all: true
     filter: *FilterUS
- 
-# 规则集定义
-# 注意：由于源是 .list 格式，behavior 设为 classical
+
 RuleSetClassical: &RuleSetClassical {type: http, behavior: classical, interval: 86400, format: text}
 
 rule-providers:
@@ -278,11 +230,6 @@ rule-providers:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list
     path: ./ruleset/Microsoft.list
 
-  Apple:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple.list
-    path: ./ruleset/Apple.list
-
   Google:
     <<: *RuleSetClassical
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.list
@@ -293,20 +240,10 @@ rule-providers:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub.list
     path: ./ruleset/GitHub.list
 
-  Telegram:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list
-    path: ./ruleset/Telegram.list
-
   YouTube:
     <<: *RuleSetClassical
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.list
     path: ./ruleset/YouTube.list
-
-  TikTok:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/TikTok/TikTok.list
-    path: ./ruleset/TikTok.list
 
   BiliBiliHMT:
     <<: *RuleSetClassical
@@ -339,39 +276,20 @@ rule-providers:
     path: ./ruleset/China.list
 
 rules:
-  # 局域网及个人最高优先级覆盖（必须放在最前）
   - RULE-SET,Lan,🎯 全球直连
-
-  # 境内高频下载与特例服务直连（防止被后续的 Proxy 规则捕获）
   - RULE-SET,Download,🎯 全球直连
   - RULE-SET,GoogleCN,🎯 全球直连
   - RULE-SET,SteamCN,🎯 全球直连
-
-  # 指定服务及平台精准分流（必须放在 Proxy 泛用规则之前）
   - RULE-SET,AiSuite,💬 Ai平台
   - RULE-SET,Microsoft,🪟 微软服务
-  - RULE-SET,Apple,🍎 苹果服务
   - RULE-SET,Google,✈️ 起飞选择
   - RULE-SET,GitHub,✈️ 起飞选择
-  - RULE-SET,Telegram,📲 电报消息
   - RULE-SET,YouTube,📹 油管视频
-  - RULE-SET,TikTok,🎵 TikTok
-
-  # 哔哩哔哩分流
   - RULE-SET,BiliBiliHMT,📺 哔哩哔哩
   - RULE-SET,BiliBiliBM,🎯 全球直连
-
-  # 广泛的代理规则兜底
   - RULE-SET,Proxy,✈️ 起飞选择
-  
   - RULE-SET,Scholar,🎓 学术平台
-
-  # 中国大陆域名及直连兜底
   - RULE-SET,Direct,🎯 全球直连
   - RULE-SET,China,🎯 全球直连
-
-  # 🎯 全球直连 - GEOIP CN
   - GEOIP,CN,🎯 全球直连
-  
-  # 🐟 漏网之鱼 - Final
   - MATCH,🐟 漏网之鱼
