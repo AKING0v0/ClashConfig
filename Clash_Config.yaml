@@ -155,7 +155,7 @@ proxy-groups:
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
     tolerance: 60
-    proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点]
+    proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点]
 
   - name: 👆🏻 手动切换
     type: select
@@ -171,11 +171,11 @@ proxy-groups:
 
   - name: 💬 Ai平台
     type: select
-    proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点]
+    proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点, 🇸🇬 狮城节点, 🇺🇲 美国节点]
 
   - name: 📹 油管视频
     type: select
-    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
 
   - name: 🎵 TikTok
     type: select
@@ -185,7 +185,7 @@ proxy-groups:
 
   - name: 📲 电报消息
     type: select
-    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
 
   - name: 📺 哔哩哔哩
     type: select
@@ -193,19 +193,19 @@ proxy-groups:
 
   - name: 🎓 学术平台
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
   - name: 🪟 微软服务
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
   - name: 🍎 苹果服务
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
   - name: 🎯 全球直连
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
   - name: 🌏 其他国家
     type: select
