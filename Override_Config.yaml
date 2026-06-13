@@ -7,8 +7,8 @@
 port: 7890
 socks-port: 7891
 mixed-port: 7892
-redir-port: 7893
-tproxy-port: 7894
+# redir-port: 7893
+# tproxy-port: 7894
 
 unified-delay: true
 geodata-mode: true
@@ -116,7 +116,7 @@ FilterKR: &FilterKR "(?i)(🇰🇷|韩国|韓|首尔|\\b(KR|KOR|Korea)\\d*\\b)"
 FilterSG: &FilterSG "(?i)(🇸🇬|新加坡|狮|\\b(SG|SGP|Singapore)\\d*\\b)"
 FilterUS: &FilterUS "(?i)(🇺🇸|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(US|USA|United States)\\d*\\b)"
 
-AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 300, tolerance: 60}
+AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 120, tolerance: 60}
 
 proxy-groups:
   - name: ✈️ 起飞选择
@@ -140,7 +140,7 @@ proxy-groups:
 
   - name: 💬 Ai平台
     type: select
-    proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点,🇰🇷 韩国节点,🇸🇬 狮城节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+    proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点, 🇸🇬 狮城节点, 🇺🇲 美国节点]
 
   - name: 📺 哔哩哔哩
     type: select
@@ -148,19 +148,19 @@ proxy-groups:
 
   - name: 📹 油管视频
     type: select
-    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
 
   - name: 🎓 学术平台
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
   - name: 🪟 微软服务
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
   - name: 🎯 全球直连
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
   - name: 🌏 全球节点
     type: select
