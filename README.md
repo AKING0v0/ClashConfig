@@ -12,19 +12,20 @@ https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/SubConv_C
 订阅转换配置修改自
 [ACL4SSR](https://git.moezx.cc/mashiro/ACL4SSR/raw/branch/master/Clash/config/ACL4SSR_Online_Full.ini)与[zsokami](https://raw.githubusercontent.com/zsokami/ACL4SSR/main/ACL4SSR_Online_Full_Mannix.ini)
 
-## 补充说明
+### 补充说明
 由于ACL4SSR规则停更，所以替换了一部分[ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)规则。
 
 移除
 - 🛑 广告拦截
+- 🍃 应用净化
 - 📢 谷歌FCM
+- Ⓜ️ 微软Bing
 - Ⓜ️ 微软云盘
 - 🎶 网易音乐
 - 🎮 游戏平台
+- 📺 巴哈姆特
 - 🌏 国内媒体
 - 🌍 国外媒体
-- 📺 巴哈姆特
-- 🍃 应用净化
 
 重命名
 - Ⓜ️ 微软服务 -> 🪟 微软服务
