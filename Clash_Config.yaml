@@ -71,7 +71,7 @@ tun:
   auto-detect-interface: true
 
 listeners:
-- name: socks5-in-1
+  name: socks5-in-1
   type: socks
   port: 10808
   listen: 0.0.0.0
@@ -95,16 +95,13 @@ dns:
     - '+.stun.*'
     - '+.stun.*.*'
     - '+.stun.*.*.*'
-
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
-
   nameserver-policy:
     'geosite:cn,private':
       - https://223.5.5.5/dns-query
-      - https://223.6.6.6/dns-query
-
+      - https://1.12.12.12/dns-query
   nameserver:
     - https://8.8.8.8/dns-query
     - https://1.1.1.1/dns-query
@@ -112,10 +109,9 @@ dns:
 # 锚点 - 节点订阅的参数
 NodeParam: &NodeParam {type: http, interval: 21600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}}
 
-# 【新增】锚点 - 全局机场名单 (在这里管理所有机场的名字)
+# 锚点 - 全局机场名单 (在这里管理所有机场的名字)
 # 以后有新机场，只需要在这里加上名字，并在下方 proxy-providers 添加对应配置即可
 AllProviderList: &AllProviderList [机场订阅1,机场订阅2]
-
 proxy-providers: 
   机场订阅1:
     url: '机场订阅链接1'
@@ -126,8 +122,7 @@ proxy-providers:
     <<: *NodeParam
     path: './proxy_provider/Providers_2.yaml'
 
-# 锚点
-# 地区筛选正则
+# 锚点 - 地区筛选正则
 FilterAI: &FilterAI "(?i)(🇯🇵|🇸🇬|🇹🇼|🇰🇷|🇺🇸|日本|东京|大阪|新加坡|狮|台湾|韩国|韓|首尔|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|SG|SGP|Singapore|TW|TWN|Tai|Taiwan|KR|KOR|Korea|US|USA|United States)\\d*\\b)"
 FilterTikTok: &FilterTikTok "(?i)(🇯🇵|🇸🇬|🇹🇼|🇰🇷|🇺🇸|日本|东京|大阪|新加坡|狮|台湾|韩国|韓|首尔|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|SG|SGP|Singapore|TW|TWN|Tai|Taiwan|KR|KOR|Korea|US|USA|United States)\\d*\\b)"
 FilterHK: &FilterHK "^(?=.*(?i)(🇭🇰|香港|\\b(HK|HKG|Hong)\\d*\\b))(?!.*(?i)(0\\.\\d+|1\\.[1-9]\\d*|[2-9](\\.\\d+)?|\\d{2,})[xX倍]).*$"
@@ -138,7 +133,7 @@ FilterSG: &FilterSG "(?i)(🇸🇬|新加坡|狮|\\b(SG|SGP|Singapore)\\d*\\b)"
 FilterUS: &FilterUS "(?i)(🇺🇸|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(US|USA|United States)\\d*\\b)"
 FilterGlobal: &FilterGlobal "^(?!.*(?i)(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|\\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)\\d*\\b|\\d{4}-\\d{2}-\\d{2}|\\dG)).*$"
 
-# 自动测速组参数 (url-test)
+# 锚点 - 自动测速组参数 (url-test)
 AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 300, tolerance: 60}
 
 proxy-groups:
