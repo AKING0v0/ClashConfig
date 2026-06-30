@@ -106,14 +106,12 @@ nameserver:
     - https://8.8.8.8/dns-query
     - https://1.1.1.1/dns-query
 
-FilterHK: &FilterHK "^(?=.*(?i)(🇭🇰|香港|\\b(HK|HKG|Hong)\\d*\\b))(?!.*(?i)(0\\.\\d+|1\\.[1-9]\\d*|[2-9](\\.\\d+)?|\\d{2,})[xX倍]).*$"
-FilterJP: &FilterJP "(?i)(🇯🇵|日本|东京|大阪|\\b(JP|JPN|Japan)\\d*\\b)"
-FilterTW: &FilterTW "(?i)(🇹🇼|台湾|\\b(TW|TWN|Tai|Taiwan)\\d*\\b)"
-FilterKR: &FilterKR "(?i)(🇰🇷|韩国|韓|首尔|\\b(KR|KOR|Korea)\\d*\\b)"
-FilterSG: &FilterSG "(?i)(🇸🇬|新加坡|狮|\\b(SG|SGP|Singapore)\\d*\\b)"
-FilterUS: &FilterUS "(?i)(🇺🇸|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(US|USA|United States)\\d*\\b)"
-
-AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 120, tolerance: 60}
+FilterHK: &FilterHK "^(?=.*(?i)(🇭🇰|港|\\b(HK|Hong Kong|HongKong)\\d*\\b))(?!.*(?i)(0\\.\\d+|1\\.[1-9]\\d*|[2-9](\\.\\d+)?|\\d{2,})[xX倍]).*$"
+FilterJP: &FilterJP "(?i)(🇯🇵|日|东京|大阪|\\b(JP|Japan)\\d*\\b)"
+FilterTW: &FilterTW "(?i)(🇹🇼|台|\\b(TW|Taiwan)\\d*\\b)"
+FilterKR: &FilterKR "(?i)(🇰🇷|韩|韓|首尔|\\b(KR|KOR|Korea)\\d*\\b)"
+FilterSG: &FilterSG "(?i)(🇸🇬|坡|狮城|\\b(SG|Singapore)\\d*\\b)"
+FilterUS: &FilterUS "(?i)(🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|\\b(US|United States)\\d*\\b)"
 
 proxy-groups:
   - name: ✈️ 起飞选择
