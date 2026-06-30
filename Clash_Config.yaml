@@ -123,8 +123,8 @@ proxy-providers:
     path: './proxy_provider/Providers_2.yaml'
 
 # 锚点 - 地区筛选正则
-FilterAI: &FilterAI "(?i)(🇯🇵|🇸🇬|🇹🇼|🇰🇷|🇺🇸|日本|东京|大阪|新加坡|狮|台湾|韩国|韓|首尔|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|SG|SGP|Singapore|TW|TWN|Tai|Taiwan|KR|KOR|Korea|US|USA|United States)\\d*\\b)"
-FilterTikTok: &FilterTikTok "(?i)(🇯🇵|🇸🇬|🇹🇼|🇰🇷|🇺🇸|日本|东京|大阪|新加坡|狮|台湾|韩国|韓|首尔|美国|洛杉矶|旧金山|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|SG|SGP|Singapore|TW|TWN|Tai|Taiwan|KR|KOR|Korea|US|USA|United States)\\d*\\b)"
+FilterAI: &FilterAI "(?i)(🇯🇵|🇹🇼|🇰🇷|🇸🇬|🇺🇸|日本|东京|大阪|台湾|韩国|韓|首尔|新加坡|狮|美国|洛杉矶|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|TW|TWN|Tai|Taiwan|KR|KOR|Korea|SG|SGP|Singapore|US|USA|United States)\\d*\\b)"
+FilterTikTok: &FilterTikTok "(?i)(🇯🇵|🇹🇼|🇰🇷|🇸🇬|🇺🇸|日本|东京|大阪|台湾|韩国|韓|首尔|新加坡|狮|美国|洛杉矶|圣何塞|西雅图|波特兰|\\b(JP|JPN|Japan|TW|TWN|Tai|Taiwan|KR|KOR|Korea|SG|SGP|Singapore|US|USA|United States)\\d*\\b)"
 FilterHK: &FilterHK "^(?=.*(?i)(🇭🇰|香港|\\b(HK|HKG|Hong)\\d*\\b))(?!.*(?i)(0\\.\\d+|1\\.[1-9]\\d*|[2-9](\\.\\d+)?|\\d{2,})[xX倍]).*$"
 FilterJP: &FilterJP "(?i)(🇯🇵|日本|东京|大阪|\\b(JP|JPN|Japan)\\d*\\b)"
 FilterTW: &FilterTW "(?i)(🇹🇼|台湾|\\b(TW|TWN|Tai|Taiwan)\\d*\\b)"
