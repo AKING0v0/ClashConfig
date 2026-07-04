@@ -43,7 +43,7 @@ url-test                                 
 
 ## 📈 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=AKING0v0/ClashConfig&&type=Date)](https://www.star-history.com/#AKING0v0/ClashConfig&&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=AKING0v0/ClashConfig&&type=Date)](https://www.star-history.com/#AKING0v0/ClashConfig&Date)
 
 ---
 **如果这个项目对你有帮助，请给个 Star ⭐️ 吧！**
