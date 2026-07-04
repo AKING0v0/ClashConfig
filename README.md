@@ -40,3 +40,10 @@ https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/SubConv_C
 url-test                                  
 - 间隔时间 300秒 -> 120秒
 - 容差 50/150毫秒 -> 60毫秒
+
+## 📈 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=AKING0v0/ClashConfig&type=date&legend=top-left)](https://www.star-history.com/#AKING0v0/ClashConfig&type=date&legend=top-left)
+
+---
+**如果这个项目对你有帮助，请给个 Star ⭐️ 吧！**
