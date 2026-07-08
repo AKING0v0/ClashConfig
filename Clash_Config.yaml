@@ -69,8 +69,10 @@ tun:
   stack: system
   dns-hijack:
   - any:53
+  ⁠endpoint-independent-nat⁠: true
   auto-route: true
   auto-detect-interface: true
+  strict-route: true
 
 listeners:
   name: socks5-in-1
