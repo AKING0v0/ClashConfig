@@ -2,7 +2,7 @@
 # 现配置作者：https://github.com/AKING0v0
 # 原配置作者：https://github.com/Rabbit-Spec
 # 核心设置保留原版 Clash_Max，策略与规则修改自 ACL4SSR
-# 适用版本：所有使用 Mihomo (Meta) 内核的程序
+# 适用版本：所有使用 Mihomo (Meta) 内核的程序，路由器使用按需修改
 
 # 全局网络与基础设置
 port: 7890
