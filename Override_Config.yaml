@@ -52,6 +52,37 @@ listeners:
   users: []
   proxy: DIRECT
 
+# 流量嗅探设置
+sniffer:
+  enable: true
+  override-destination: true
+  sniff:
+    QUIC:
+      ports:
+      - 443
+      - 8443
+    TLS:
+      ports:
+      - 443
+      - 8443
+    HTTP:
+      ports:
+      - 80
+      - 8080-8880
+      override-destination: true
+  force-domain:
+  - "+.netflix.com"
+  - "+.nflxvideo.net"
+  - "+.amazonaws.com"
+  - "+.media.dssott.com"
+  skip-domain:
+  - "+.apple.com"
+  - "+.push.apple.com"
+  - "+.msftconnecttest.com"
+  - "+.msftncsi.com"
+  parse-pure-ip: true
+  force-dns-mapping: true
+
 # DNS 解析设置
 dns:
   enable: true
