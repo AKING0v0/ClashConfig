@@ -3,6 +3,8 @@
 # 原配置作者：https://github.com/Rabbit-Spec
 # 核心设置保留原版 Clash_Max，策略与规则修改自 ACL4SSR
 # 适用版本：所有使用 Mihomo (Meta) 内核的# 全局网络与基础设置
+
+# 全局网络与基础设置
 port: 7890
 socks-port: 7891
 mixed-port: 7892
@@ -30,45 +32,16 @@ profile:
   store-selected: true
   store-fake-ip: true
 
-# 流量嗅探设置
-sniffer:
-  enable: true
-  override-destination: true
-  sniff:
-    QUIC:
-      ports:
-      - 443
-      - 8443
-    TLS:
-      ports:
-      - 443
-      - 8443
-    HTTP:
-      ports:
-      - 80
-      - 8080-8880
-      override-destination: true
-  force-domain:
-  - "+.netflix.com"
-  - "+.nflxvideo.net"
-  - "+.amazonaws.com"
-  - "+.media.dssott.com"
-  skip-domain:
-  - "+.apple.com"
-  - "+.push.apple.com"
-  - "+.msftconnecttest.com"
-  - "+.msftncsi.com"
-  parse-pure-ip: true
-  force-dns-mapping: true
-
 # TUN 与附加监听设置
 tun:
   enable: true
   stack: system
   dns-hijack:
   - any:53
+  ⁠endpoint-independent-nat⁠: true
   auto-route: true
   auto-detect-interface: true
+  strict-route: true
 
 listeners:
   name: socks5-in-1
