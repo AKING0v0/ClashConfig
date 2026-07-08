@@ -68,7 +68,7 @@ tun:
   enable: true
   stack: system
   dns-hijack:
-    - any:53
+  - any:53
   auto-route: true
   auto-detect-interface: true
 
@@ -83,7 +83,7 @@ listeners:
 
 # DNS 解析设置
 dns:
-   enable: true
+  enable: true
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
@@ -337,39 +337,38 @@ rule-providers:
 
 # 路由规则
 rules:
-  # 局域网及个人最高优先级覆盖（必须放在最前）
-  - RULE-SET,Lan,🎯 全球直连
+# 局域网及个人最高优先级覆盖（必须放在最前）
+- RULE-SET,Lan,🎯 全球直连
 
-  # 境内高频下载与特例服务直连（防止被后续的 Proxy 规则捕获）
-  - RULE-SET,Download,🎯 全球直连
-  - RULE-SET,GoogleCN,🎯 全球直连
-  - RULE-SET,SteamCN,🎯 全球直连
+# 境内高频下载与特例服务直连（防止被后续的 Proxy 规则捕获）
+- RULE-SET,Download,🎯 全球直连
+- RULE-SET,GoogleCN,🎯 全球直连
+- RULE-SET,SteamCN,🎯 全球直连
 
-  # 指定服务及平台精准分流（必须放在 Proxy 泛用规则之前）
-  - RULE-SET,AiSuite,💬 Ai平台
-  - RULE-SET,Microsoft,🪟 微软服务
-  - RULE-SET,Apple,🍎 苹果服务
-  - RULE-SET,Google,✈️ 起飞选择
-  - RULE-SET,GitHub,✈️ 起飞选择
-  - RULE-SET,Telegram,📲 电报消息
-  - RULE-SET,YouTube,📹 油管视频
-  - RULE-SET,TikTok,🎵 TikTok
+# 指定服务及平台精准分流（必须放在 Proxy 泛用规则之前）
+- RULE-SET,AiSuite,💬 Ai平台  - RULE-SET,Microsoft,🪟 微软服务
+- RULE-SET,Apple,🍎 苹果服务
+- RULE-SET,Google,✈️ 起飞选择
+- RULE-SET,GitHub,✈️ 起飞选择
+- RULE-SET,Telegram,📲 电报消息
+- RULE-SET,YouTube,📹 油管视频
+- RULE-SET,TikTok,🎵 TikTok
 
-  # 哔哩哔哩分流
-  - RULE-SET,BiliBiliHMT,📺 哔哩哔哩
-  - RULE-SET,BiliBiliBM,🎯 全球直连
+# 哔哩哔哩分流
+- RULE-SET,BiliBiliHMT,📺 哔哩哔哩
+- RULE-SET,BiliBiliBM,🎯 全球直连
 
-  # 广泛的代理规则兜底
-  - RULE-SET,Proxy,✈️ 起飞选择
+# 广泛的代理规则兜底
+- RULE-SET,Proxy,✈️ 起飞选择
   
-  - RULE-SET,Scholar,🎓 学术平台
+- RULE-SET,Scholar,🎓 学术平台
 
-  # 中国大陆域名及直连兜底
-  - RULE-SET,Direct,🎯 全球直连
-  - RULE-SET,China,🎯 全球直连
+# 中国大陆域名及直连兜底
+- RULE-SET,Direct,🎯 全球直连
+- RULE-SET,China,🎯 全球直连
 
-  # 🎯 全球直连 - GEOIP CN
-  - GEOIP,CN,🎯 全球直连
+# 🎯 全球直连 - GEOIP CN
+- GEOIP,CN,🎯 全球直连
   
-  # 🐟 漏网之鱼 - Final
-  - MATCH,🐟 漏网之鱼
+# 🐟 漏网之鱼 - Final
+- MATCH,🐟 漏网之鱼
