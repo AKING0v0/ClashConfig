@@ -138,103 +138,103 @@ AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204'
 
 # 策略组
 proxy-groups:
-  - name: ✈️ 起飞选择
+- name: ✈️ 起飞选择
     type: select
     proxies: [♻️ 故障转移, ⚡ 最低延迟, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
-  - name: 🐟 漏网之鱼
+- name: 🐟 漏网之鱼
     type: select
     proxies: [✈️ 起飞选择, DIRECT, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
-  - name: ♻️ 故障转移
+- name: ♻️ 故障转移
     type: fallback
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
     tolerance: 60
     proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点]
 
-  - name: 👆🏻 手动切换
+- name: 👆🏻 手动切换
     type: select
     proxies: [🌏 其他国家]
     use: *AllProviderList
     filter: '.*'
 
-  - name: ⚡ 最低延迟
+- name: ⚡ 最低延迟
     <<: *AutoTest
     use: *AllProviderList
     # 逻辑：匹配任意字符，且不包含排除关键字
     filter: *FilterGlobal
 
-  - name: 💬 Ai平台
+- name: 💬 Ai平台
     type: select
     proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点]
 
-  - name: 📹 油管视频
+- name: 📹 油管视频
     type: select
     proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
-  - name: 🎵 TikTok
+- name: 🎵 TikTok
     type: select
     proxies: [✈️ 起飞选择]
     use: *AllProviderList
     filter: *FilterTikTok
 
-  - name: 📲 电报消息
+- name: 📲 电报消息
     type: select
     proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
-  - name: 📺 哔哩哔哩
+- name: 📺 哔哩哔哩
     type: select
     proxies: [DIRECT, 🇭🇰 香港节点, 🇨🇳 台湾节点]
 
-  - name: 🎓 学术平台
+- name: 🎓 学术平台
     type: select
     proxies: [DIRECT, 👆🏻 手动切换]
 
-  - name: 🪟 微软服务
+- name: 🪟 微软服务
     type: select
     proxies: [DIRECT, 👆🏻 手动切换]
 
-  - name: 🍎 苹果服务
+- name: 🍎 苹果服务
     type: select
     proxies: [DIRECT, 👆🏻 手动切换]
 
-  - name: 🎯 全球直连
+- name: 🎯 全球直连
     type: select
     proxies: [DIRECT, 👆🏻 手动切换]
 
-  - name: 🌏 其他国家
+- name: 🌏 其他国家
     type: select
     use: *AllProviderList
     # 逻辑：排除CN,HK,TW,SG,JP,US,KR
     filter: '^(?!.*(?i)(🇨🇳|🇭🇰|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇰🇷|中国|香港|台湾|新加坡|狮|日本|东京|大阪|美国|洛杉矶|圣何塞|西雅图|波特兰|韩国|韓|首尔|\b(CN|China|HK|HKG|Hong|TW|TWN|Tai|Taiwan|SG|SGP|Singapore|JP|JPN|Japan|US|USA|United States|KR|KOR|Korea)\d*\b)).*$'
 
-  - name: 🇭🇰 香港节点
+- name: 🇭🇰 香港节点
     <<: *AutoTest
     use: *AllProviderList
     filter: *FilterHK
   
-  - name: 🇯🇵 日本节点
+- name: 🇯🇵 日本节点
     <<: *AutoTest
     use: *AllProviderList
     filter: *FilterJP
 
-  - name: 🇨🇳 台湾节点
+- name: 🇨🇳 台湾节点
     <<: *AutoTest
     use: *AllProviderList
     filter: *FilterTW
 
-  - name: 🇰🇷 韩国节点
+- name: 🇰🇷 韩国节点
     <<: *AutoTest
     use: *AllProviderList
     filter: *FilterKR
   
-  - name: 🇸🇬 狮城节点
+- name: 🇸🇬 狮城节点
     <<: *AutoTest
     use: *AllProviderList
     filter: *FilterSG
   
-  - name: 🇺🇲 美国节点
+- name: 🇺🇲 美国节点
     <<: *AutoTest
     use: *AllProviderList
     filter: *FilterUS
