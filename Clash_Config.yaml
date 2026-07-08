@@ -32,6 +32,26 @@ profile:
   store-selected: true
   store-fake-ip: true
 
+# TUN 与附加监听设置
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+  - any:53
+  ⁠endpoint-independent-nat⁠: true
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+
+listeners:
+  name: socks5-in-1
+  type: socks
+  port: 10808
+  listen: 0.0.0.0
+  udp: true
+  users: []
+  proxy: DIRECT
+
 # 流量嗅探设置
 sniffer:
   enable: true
@@ -62,26 +82,6 @@ sniffer:
   - "+.msftncsi.com"
   parse-pure-ip: true
   force-dns-mapping: true
-
-# TUN 与附加监听设置
-tun:
-  enable: true
-  stack: system
-  dns-hijack:
-  - any:53
-  ⁠endpoint-independent-nat⁠: true
-  auto-route: true
-  auto-detect-interface: true
-  strict-route: true
-
-listeners:
-  name: socks5-in-1
-  type: socks
-  port: 10808
-  listen: 0.0.0.0
-  udp: true
-  users: []
-  proxy: DIRECT
 
 # DNS 解析设置
 dns:
