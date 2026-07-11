@@ -1,8 +1,7 @@
-# AKING0v0的「Clash_Config」Mihomo覆写配置
+# AKING0v0的「Clash_Config」Mihomo配置
 # 现配置作者：https://github.com/AKING0v0
-# 原配置作者：https://github.com/Rabbit-Spec
-# 核心设置保留原版 Clash_Max，策略与规则修改自 ACL4SSR
-# 适用版本：所有使用 Mihomo (Meta) 内核的程序，路由器使用按需修改
+# 原配置作者：https://github.com/Aethersailor
+# 适用版本：所有使用 Mihomo (Meta) 内核的程序，OpenClash使用按需修改
 
 # 全局网络与基础设置
 port: 7890
@@ -14,7 +13,6 @@ allow-lan: true
 mode: rule
 log-level: info
 ipv6: false
-udp: true
 tcp-concurrent: true
 unified-delay: true
 
@@ -27,30 +25,30 @@ geox-url:
   geoip: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
   geosite: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
   asn: https://testingcf.jsdelivr.net/gh/xishang0128/geoip@release/GeoLite2-ASN.mmdb
+geo-auto-update: true
+geo-update-interval: 24
+geodata-mode: true
 
 profile:
   store-selected: true
   store-fake-ip: true
 
-# TUN 与附加监听设置
+# TUN 设置
 tun:
   enable: true
   stack: system
   dns-hijack:
   - any:53
-  ⁠endpoint-independent-nat⁠: true
+  endpoint-independent-nat: true
+  # 自动配置路由表（OpenClash 环境下设为 false）
   auto-route: true
+  # 自动检测网络接口（OpenClash 环境下设为 false）
   auto-detect-interface: true
+  # 自动配置 iptables 重定向（OpenClash 环境下设为 false）
+  auto-redirect: true
+  # 严格路由模式（OpenClash 环境下应设为 false）
   strict-route: true
-
-listeners:
-  name: socks5-in-1
-  type: socks
-  port: 10808
-  listen: 0.0.0.0
-  udp: true
-  users: []
-  proxy: DIRECT
+  disable-icmp-forwarding: false
 
 # 流量嗅探设置
 sniffer:
@@ -60,7 +58,6 @@ sniffer:
     QUIC:
       ports:
       - 443
-      - 8443
     TLS:
       ports:
       - 443
@@ -76,10 +73,12 @@ sniffer:
   - "+.amazonaws.com"
   - "+.media.dssott.com"
   skip-domain:
-  - "+.apple.com"
+  - "+.mi.com"
+  - "+.xiaomi.com"
+  - "+.xiaomi.net"
+  - "+.oray.com"
+  - "+.sunlogin.net"
   - "+.push.apple.com"
-  - "+.msftconnecttest.com"
-  - "+.msftncsi.com"
   parse-pure-ip: true
   force-dns-mapping: true
 
@@ -98,16 +97,134 @@ dns:
   - 119.29.29.29
   fake-ip-filter:
   - "*.lan"
+  - "*.localdomain"
+  - "*.example"
+  - "*.invalid"
+  - "*.localhost"
+  - "*.test"
   - "*.local"
-  - "localhost.ptlogin2.qq.com"
+  - "*.home.arpa"
+  - "*.direct"
+  - PDC._msDCS.*.*
+  - DC._msDCS.*.*
+  - GC._msDCS.*.*
+  - cable.auth.com
+  - network-test.debian.org
+  - detectportal.firefox.com
+  - resolver1.opendns.com
   - "+.msftconnecttest.com"
   - "+.msftncsi.com"
-  - "+.stun.*"
+  - "*.cmpassport.com"
+  - id6.me
+  - open.e.189.cn
+  - opencloud.wostore.cn
+  - id.mail.wo.cn
+  - mdn.open.wo.cn
+  - hmrz.wo.cn
+  - nishub1.10010.com
+  - enrichgw.10010.com
+  - "*.wosms.cn"
+  - "*.jegotrip.com.cn"
+  - "*.icitymobile.mobi"
+  - "*.10099.com.cn"
+  - "*.pingan.com.cn"
+  - "*.cmbchina.com"
+  - "+.cmbchina.com"
+  - "+.cmbimg.com"
+  - "*.microdone.cn"
+  - localhost.*.weixin.qq.com
+  - localhost.ptlogin2.qq.com
+  - localhost.sec.qq.com
+  - "+.qq.com"
+  - "+.tencent.com"
+  - mesu.apple.com
+  - swscan.apple.com
+  - swquery.apple.com
+  - swdownload.apple.com
+  - swcdn.apple.com
+  - swdist.apple.com
+  - "+.pub.3gppnetwork.org"
+  - "*.blzstatic.cn"
+  - "+.battle.net"
+  - "+.battlenet.com.cn"
+  - "+.wotgame.cn"
+  - "+.wggames.cn"
+  - "+.wowsgame.cn"
+  - "+.wargaming.net"
+  - "+.srv.nintendo.net"
+  - "*.n.n.srv.nintendo.net"
+  - "+.cdn.nintendo.net"
+  - "+.stun.playstation.net"
+  - xbox.*.*.microsoft.com
+  - "*.*.xboxlive.com"
+  - xbox.*.microsoft.com
+  - xnotify.xboxlive.com
+  - "+.uu.163.com"
+  - ps.res.netease.com
+  - music.163.com
+  - "*.music.163.com"
+  - "*.126.net"
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - "*.kuwo.cn"
+  - y.qq.com
+  - "*.y.qq.com"
+  - streamoc.music.tc.qq.com
+  - mobileoc.music.tc.qq.com
+  - isure.stream.qqmusic.qq.com
+  - dl.stream.qqmusic.qq.com
+  - aqqmusic.tc.qq.com
+  - amobile.music.tc.qq.com
+  - "*.mcdn.bilivideo.cn"
+  - "+.nflxvideo.net"
+  - "+.media.dssott.com"
+  - global.turn.twilio.com
+  - global.stun.twilio.com
+  - stun.l.google.com
+  - stun.*.*
+  - stun.*.*.*
   - "+.stun.*.*"
   - "+.stun.*.*.*"
+  - "+.stun.*.*.*.*"
+  - "+.stun.*.*.*.*.*"
+  - "+.sandai.net"
+  - "+.n0808.com"
+  - time.*.com
+  - time.*.gov
+  - time.*.edu.cn
+  - time.*.apple.com
+  - time-ios.apple.com
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - "*.time.edu.cn"
+  - "*.ntp.org.cn"
+  - "+.pool.ntp.org"
+  - time1.cloud.tencent.com
+  - lens.l.google.com
+  - na.b.g-tun.com
+  - injections.adguard.org
+  - local.adguard.org
+  - "+.mi.com"
+  - "+.xiaomi.com"
+  - "+.xiaomi.net"
+  respect-rules: false
+  fake-ip-filter-mode: blacklist
 
 # 锚点 - 地区筛选正则
-FilterAI: &FilterAI '(?i)(🇯🇵|🇹🇼|🇰🇷|🇸🇬|🇺🇸|日|东京|大阪|台|韩|韓|首尔|坡|狮城|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|\b(JP|Japan|TW|Taiwan|KR|KOR|Korea|SG|Singapore|US|United States)\d*\b)'
+FilterAi: &FilterAi '(?i)(🇯🇵|🇹🇼|🇰🇷|🇸🇬|🇺🇸|日|东京|大阪|台|韩|韓|首尔|坡|狮城|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|\b(JP|Japan|TW|Taiwan|KR|KOR|Korea|SG|Singapore|US|United States)\d*\b)'
 FilterTikTok: &FilterTikTok '(?i)(🇯🇵|🇹🇼|🇰🇷|🇸🇬|🇺🇸|日|东京|大阪|台|韩|韓|首尔|坡|狮城|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|\b(JP|Japan|TW|Taiwan|KR|KOR|Korea|SG|Singapore|US|United States)\d*\b)'
 FilterHK: &FilterHK '^(?=.*(?i)(🇭🇰|港|\b(HK|Hong Kong|HongKong)\d*\b))(?!.*(?i)(0\.\d+|1\.[1-9]\d*|[2-9](\.\d+)?|\d{2,})[xX倍]).*$'
 FilterJP: &FilterJP '(?i)(🇯🇵|日|东京|大阪|\b(JP|Japan)\d*\b)'
@@ -118,7 +235,7 @@ FilterUS: &FilterUS '(?i)(🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|�
 FilterGlobal: &FilterGlobal '^(?!.*(?i)(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)\d*\b|\d{4}-\d{2}-\d{2}|\dG)).*$'
 
 # 锚点 - 自动测速组参数
-AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 300, tolerance: 60}
+AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 120, tolerance: 60}
 
 # 策略组
 proxy-groups:
@@ -133,13 +250,13 @@ proxy-groups:
 - name: ♻️ 故障转移
     type: fallback
     url: 'https://www.gstatic.com/generate_204'
-    interval: 300
+    interval: 120
     tolerance: 60
     proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点]
 
 - name: 👆🏻 手动切换
     type: select
-    proxies: [🌏 其他国家]
+    proxies: [🧊 冷门国家]
     use: *AllProviderList
     filter: '.*'
 
@@ -152,10 +269,12 @@ proxy-groups:
 - name: 💬 Ai平台
     type: select
     proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点]
+    use: *AllProviderList
+    filter: *FilterAi
 
 - name: 📹 油管视频
     type: select
-    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
 
 - name: 🎵 TikTok
     type: select
@@ -165,7 +284,7 @@ proxy-groups:
 
 - name: 📲 电报消息
     type: select
-    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
 
 - name: 📺 哔哩哔哩
     type: select
@@ -173,21 +292,21 @@ proxy-groups:
 
 - name: 🎓 学术平台
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
 - name: 🪟 微软服务
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
 - name: 🍎 苹果服务
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
 - name: 🎯 全球直连
     type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+    proxies: [DIRECT, ✈️ 起飞选择]
 
-- name: 🌏 其他国家
+- name: 🧊 冷门国家
     type: select
     use: *AllProviderList
     # 逻辑：排除CN,HK,TW,SG,JP,US,KR
@@ -336,5 +455,5 @@ rules:
 - RULE-SET,Scholar,🎓 学术平台
 - RULE-SET,Direct,🎯 全球直连
 - RULE-SET,China,🎯 全球直连
-- GEOIP,CN,🎯 全球直连
+- GEOIP,CN,🎯 全球直连,no-resolve
 - MATCH,🐟 漏网之鱼
