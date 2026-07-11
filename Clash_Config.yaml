@@ -73,7 +73,6 @@ sniffer:
   - "+.amazonaws.com"
   - "+.media.dssott.com"
   skip-domain:
-    skip-domain:
   - "+.mi.com"
   - "+.xiaomi.com"
   - "+.xiaomi.net"
