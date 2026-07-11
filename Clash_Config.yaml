@@ -1,8 +1,7 @@
 # AKING0v0的「Clash_Config」Mihomo配置
 # 现配置作者：https://github.com/AKING0v0
 # 原配置作者：https://github.com/Rabbit-Spec
-# 核心设置保留原版 Clash_Max，策略与规则修改自 ACL4SSR
-# 适用版本：所有使用 Mihomo (Meta) 内核的程序，路由器使用按需修改
+# 适用版本：所有使用 Mihomo (Meta) 内核的程序，OpenClash使用按需修改
 
 # 全局网络与基础设置
 port: 7890
@@ -14,7 +13,6 @@ allow-lan: true
 mode: rule
 log-level: info
 ipv6: false
-udp: true
 tcp-concurrent: true
 unified-delay: true
 
@@ -27,30 +25,30 @@ geox-url:
   geoip: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
   geosite: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
   asn: https://testingcf.jsdelivr.net/gh/xishang0128/geoip@release/GeoLite2-ASN.mmdb
+geo-auto-update: true
+geo-update-interval: 24
+geodata-mode: true
 
 profile:
   store-selected: true
   store-fake-ip: true
 
-# TUN 与附加监听设置
+# TUN 设置
 tun:
   enable: true
   stack: system
   dns-hijack:
   - any:53
-  ⁠endpoint-independent-nat⁠: true
+  endpoint-independent-nat: true
+  # 自动配置路由表（OpenClash 环境下设为 false）
   auto-route: true
+  # 自动检测网络接口（OpenClash 环境下设为 false）
   auto-detect-interface: true
+  # 自动配置 iptables 重定向（OpenClash 环境下设为 false）
+  auto-redirect: true
+  # 严格路由模式（OpenClash 环境下应设为 false）
   strict-route: true
-
-listeners:
-  name: socks5-in-1
-  type: socks
-  port: 10808
-  listen: 0.0.0.0
-  udp: true
-  users: []
-  proxy: DIRECT
+  disable-icmp-forwarding: false
 
 # 流量嗅探设置
 sniffer:
@@ -60,7 +58,6 @@ sniffer:
     QUIC:
       ports:
       - 443
-      - 8443
     TLS:
       ports:
       - 443
@@ -76,10 +73,13 @@ sniffer:
   - "+.amazonaws.com"
   - "+.media.dssott.com"
   skip-domain:
-  - "+.apple.com"
+    skip-domain:
+  - "+.mi.com"
+  - "+.xiaomi.com"
+  - "+.xiaomi.net"
+  - "+.oray.com"
+  - "+.sunlogin.net"
   - "+.push.apple.com"
-  - "+.msftconnecttest.com"
-  - "+.msftncsi.com"
   parse-pure-ip: true
   force-dns-mapping: true
 
@@ -98,15 +98,133 @@ dns:
   - 119.29.29.29
   fake-ip-filter:
   - "*.lan"
+  - "*.localdomain"
+  - "*.example"
+  - "*.invalid"
+  - "*.localhost"
+  - "*.test"
   - "*.local"
-  - "localhost.ptlogin2.qq.com"
+  - "*.home.arpa"
+  - "*.direct"
+  - PDC._msDCS.*.*
+  - DC._msDCS.*.*
+  - GC._msDCS.*.*
+  - cable.auth.com
+  - network-test.debian.org
+  - detectportal.firefox.com
+  - resolver1.opendns.com
   - "+.msftconnecttest.com"
   - "+.msftncsi.com"
-  - "+.stun.*"
+  - "*.cmpassport.com"
+  - id6.me
+  - open.e.189.cn
+  - opencloud.wostore.cn
+  - id.mail.wo.cn
+  - mdn.open.wo.cn
+  - hmrz.wo.cn
+  - nishub1.10010.com
+  - enrichgw.10010.com
+  - "*.wosms.cn"
+  - "*.jegotrip.com.cn"
+  - "*.icitymobile.mobi"
+  - "*.10099.com.cn"
+  - "*.pingan.com.cn"
+  - "*.cmbchina.com"
+  - "+.cmbchina.com"
+  - "+.cmbimg.com"
+  - "*.microdone.cn"
+  - localhost.*.weixin.qq.com
+  - localhost.ptlogin2.qq.com
+  - localhost.sec.qq.com
+  - "+.qq.com"
+  - "+.tencent.com"
+  - mesu.apple.com
+  - swscan.apple.com
+  - swquery.apple.com
+  - swdownload.apple.com
+  - swcdn.apple.com
+  - swdist.apple.com
+  - "+.pub.3gppnetwork.org"
+  - "*.blzstatic.cn"
+  - "+.battle.net"
+  - "+.battlenet.com.cn"
+  - "+.wotgame.cn"
+  - "+.wggames.cn"
+  - "+.wowsgame.cn"
+  - "+.wargaming.net"
+  - "+.srv.nintendo.net"
+  - "*.n.n.srv.nintendo.net"
+  - "+.cdn.nintendo.net"
+  - "+.stun.playstation.net"
+  - xbox.*.*.microsoft.com
+  - "*.*.xboxlive.com"
+  - xbox.*.microsoft.com
+  - xnotify.xboxlive.com
+  - "+.uu.163.com"
+  - ps.res.netease.com
+  - music.163.com
+  - "*.music.163.com"
+  - "*.126.net"
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - "*.kuwo.cn"
+  - y.qq.com
+  - "*.y.qq.com"
+  - streamoc.music.tc.qq.com
+  - mobileoc.music.tc.qq.com
+  - isure.stream.qqmusic.qq.com
+  - dl.stream.qqmusic.qq.com
+  - aqqmusic.tc.qq.com
+  - amobile.music.tc.qq.com
+  - "*.mcdn.bilivideo.cn"
+  - "+.nflxvideo.net"
+  - "+.media.dssott.com"
+  - global.turn.twilio.com
+  - global.stun.twilio.com
+  - stun.l.google.com
+  - stun.*.*
+  - stun.*.*.*
   - "+.stun.*.*"
   - "+.stun.*.*.*"
+  - "+.stun.*.*.*.*"
+  - "+.stun.*.*.*.*.*"
+  - "+.sandai.net"
+  - "+.n0808.com"
+  - time.*.com
+  - time.*.gov
+  - time.*.edu.cn
+  - time.*.apple.com
+  - time-ios.apple.com
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - "*.time.edu.cn"
+  - "*.ntp.org.cn"
+  - "+.pool.ntp.org"
+  - time1.cloud.tencent.com
+  - lens.l.google.com
+  - na.b.g-tun.com
+  - injections.adguard.org
+  - local.adguard.org
+  - "+.mi.com"
+  - "+.xiaomi.com"
+  - "+.xiaomi.net"
+  respect-rules: false
+  fake-ip-filter-mode: blacklist
 
-# 锚点 - 节点订阅的参数
+# 锚点 - 节点订阅参数
 NodeParam: &NodeParam {type: http, interval: 21600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}}
 
 # 锚点 - 全局机场名单 (在这里管理所有机场的名字)
@@ -125,7 +243,7 @@ proxy-providers:
     path: './proxy_provider/Providers_2.yaml'
 
 # 锚点 - 地区筛选正则
-FilterAI: &FilterAI '(?i)(🇯🇵|🇹🇼|🇰🇷|🇸🇬|🇺🇸|日|东京|大阪|台|韩|韓|首尔|坡|狮城|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|\b(JP|Japan|TW|Taiwan|KR|KOR|Korea|SG|Singapore|US|United States)\d*\b)'
+FilterAi: &FilterAi '(?i)(🇯🇵|🇹🇼|🇰🇷|🇸🇬|🇺🇸|日|东京|大阪|台|韩|韓|首尔|坡|狮城|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|\b(JP|Japan|TW|Taiwan|KR|KOR|Korea|SG|Singapore|US|United States)\d*\b)'
 FilterTikTok: &FilterTikTok '(?i)(🇯🇵|🇹🇼|🇰🇷|🇸🇬|🇺🇸|日|东京|大阪|台|韩|韓|首尔|坡|狮城|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|\b(JP|Japan|TW|Taiwan|KR|KOR|Korea|SG|Singapore|US|United States)\d*\b)'
 FilterHK: &FilterHK '^(?=.*(?i)(🇭🇰|港|\b(HK|Hong Kong|HongKong)\d*\b))(?!.*(?i)(0\.\d+|1\.[1-9]\d*|[2-9](\.\d+)?|\d{2,})[xX倍]).*$'
 FilterJP: &FilterJP '(?i)(🇯🇵|日|东京|大阪|\b(JP|Japan)\d*\b)'
@@ -136,241 +254,202 @@ FilterUS: &FilterUS '(?i)(🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|�
 FilterGlobal: &FilterGlobal '^(?!.*(?i)(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)\d*\b|\d{4}-\d{2}-\d{2}|\dG)).*$'
 
 # 锚点 - 自动测速组参数
-AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 300, tolerance: 60}
+AutoTest: &AutoTest {type: url-test, url: 'https://www.gstatic.com/generate_204', interval: 120, tolerance: 60}
 
 # 策略组
 proxy-groups:
 - name: ✈️ 起飞选择
-    type: select
-    proxies: [♻️ 故障转移, ⚡ 最低延迟, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+  type: select
+  proxies: [♻️ 故障转移, ⚡ 最低延迟, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
 - name: 🐟 漏网之鱼
-    type: select
-    proxies: [✈️ 起飞选择, DIRECT, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+  type: select
+  proxies: [✈️ 起飞选择, DIRECT, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 👆🏻 手动切换]
 
 - name: ♻️ 故障转移
-    type: fallback
-    url: 'https://www.gstatic.com/generate_204'
-    interval: 300
-    tolerance: 60
-    proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点]
+  type: fallback
+  url: 'https://www.gstatic.com/generate_204'
+  proxies: [ 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
 
 - name: 👆🏻 手动切换
-    type: select
-    proxies: [🌏 其他国家]
-    use: *AllProviderList
-    filter: '.*'
+  type: select
+  proxies: [🧊 冷门国家]
+  use: *AllProviderList
+  filter: '.*'
 
 - name: ⚡ 最低延迟
-    <<: *AutoTest
-    use: *AllProviderList
-    # 逻辑：匹配任意字符，且不包含排除关键字
-    filter: *FilterGlobal
+  <<: *AutoTest
+  use: *AllProviderList
+  # 逻辑：匹配任意字符，且不包含排除关键字
+  filter: *FilterGlobal
 
 - name: 💬 Ai平台
-    type: select
-    proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点]
-
-- name: 📹 油管视频
-    type: select
-    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
-
-- name: 🎵 TikTok
-    type: select
-    proxies: [✈️ 起飞选择]
-    use: *AllProviderList
-    filter: *FilterTikTok
+  type: select
+  proxies: [🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点]
+  use: *AllProviderList
+  filter: *FilterAi
 
 - name: 📲 电报消息
-    type: select
-    proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 👆🏻 手动切换]
+  type: select
+  proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
+  
+- name: 📹 油管视频
+  type: select
+  proxies: [✈️ 起飞选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]
+
+- name: 🎵 TikTok
+  type: select
+  proxies: [✈️ 起飞选择, 🇨🇳 台湾节点, 🇺🇲 美国节点]
+  use: *AllProviderList
+  filter: *FilterTikTok
 
 - name: 📺 哔哩哔哩
-    type: select
-    proxies: [DIRECT, 🇭🇰 香港节点, 🇨🇳 台湾节点]
+  type: select
+  proxies: [DIRECT, 🇭🇰 香港节点, 🇨🇳 台湾节点]
 
 - name: 🎓 学术平台
-    type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
-
-- name: 🪟 微软服务
-    type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+  type: select
+  proxies: [DIRECT, ✈️ 起飞选择]
 
 - name: 🍎 苹果服务
-    type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+  type: select
+  proxies: [DIRECT, ✈️ 起飞选择]
+
+- name: 🪟 微软服务
+  type: select
+  proxies: [DIRECT, ✈️ 起飞选择]
+
+- name: 🎮 游戏平台
+  type: select
+  proxies: [DIRECT, ✈️ 起飞选择]
+
+- name: 🔀 非标端口
+  type: select
+  proxies: [DIRECT,🐟 漏网之鱼]
 
 - name: 🎯 全球直连
-    type: select
-    proxies: [DIRECT, 👆🏻 手动切换]
+  type: select
+  proxies: [DIRECT]
 
-- name: 🌏 其他国家
-    type: select
-    use: *AllProviderList
-    # 逻辑：排除CN,HK,TW,SG,JP,US,KR
-    filter: '^(?!.*(?i)(🇨🇳|🇭🇰|🇯🇵|🇹🇼|🇰🇷|🇸🇬|🇺🇸|中|港|日|东京|大阪|台|韩|韓|首尔|坡|狮城|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|\b(CN|China|HK|Hong Kong|HongKong|JP|Japan|TW|Taiwan|KR|KOR|Korea|SG|Singapore|US|United States|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)\d*\b|\d{4}-\d{2}-\d{2}|\dG)).*$'
+- name: 🧊 冷门国家
+  type: select
+  use: *AllProviderList
+  # 逻辑：排除CN,HK,TW,SG,JP,US,KR
+  filter: '^(?!.*(?i)(🇨🇳|🇭🇰|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇰🇷|中国|香港|台湾|新加坡|狮|日本|东京|大阪|美国|洛杉矶|圣何塞|西雅图|波特兰|韩国|韓|首尔|\b(CN|China|HK|HKG|Hong|TW|TWN|Tai|Taiwan|SG|SGP|Singapore|JP|JPN|Japan|US|USA|United States|KR|KOR|Korea)\d*\b)).*$'
 
 - name: 🇭🇰 香港节点
-    <<: *AutoTest
-    use: *AllProviderList
-    filter: *FilterHK
-  
+  <<: *AutoTest
+  use: *AllProviderList
+  filter: *FilterHK
+
 - name: 🇯🇵 日本节点
-    <<: *AutoTest
-    use: *AllProviderList
-    filter: *FilterJP
+  <<: *AutoTest
+  use: *AllProviderList
+  filter: *FilterJP
 
 - name: 🇨🇳 台湾节点
-    <<: *AutoTest
-    use: *AllProviderList
-    filter: *FilterTW
+  <<: *AutoTest
+  use: *AllProviderList
+  filter: *FilterTW
 
 - name: 🇰🇷 韩国节点
-    <<: *AutoTest
-    use: *AllProviderList
-    filter: *FilterKR
-  
+  <<: *AutoTest
+  use: *AllProviderList
+  filter: *FilterKR
+
 - name: 🇸🇬 狮城节点
-    <<: *AutoTest
-    use: *AllProviderList
-    filter: *FilterSG
-  
+  <<: *AutoTest
+  use: *AllProviderList
+  filter: *FilterSG
+
 - name: 🇺🇲 美国节点
-    <<: *AutoTest
-    use: *AllProviderList
-    filter: *FilterUS
- 
+  <<: *AutoTest
+  use: *AllProviderList
+  filter: *FilterUS
+
 # 规则集定义
-# 注意：由于源是 .list 格式，behavior 设为 classical
-RuleSetClassical: &RuleSetClassical {type: http, behavior: classical, interval: 86400, format: text}
+RuleSetClassical: &RuleSetClassical {type: http, behavior: classical, interval: 86400}
 
 # 规则提供商
 rule-providers:
-  Lan:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.list
-    path: ./ruleset/Lan.list
+  Custom_Direct_Domain:
+    type: http
+    behavior: domain
+    interval: 86400
+    format: mrs
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.mrs
+    path: ./ruleset/Custom_Direct_Domain.mrs
 
-  Download:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Download/Download.list
-    path: ./ruleset/Download.list
+  Custom_Direct_IP:
+    type: http
+    behavior: ipcidr
+    interval: 86400
+    format: mrs
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_IP.mrs
+    path: ./ruleset/Custom_Direct_IP.mrs
 
-  GoogleCN:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
-    path: ./ruleset/GoogleCN.list
+  Custom_Proxy_Domain:
+    type: http
+    behavior: domain
+    interval: 86400
+    format: mrs
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.mrs
+    path: ./ruleset/Custom_Proxy_Domain.mrs
 
-  SteamCN:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/SteamCN/SteamCN.list
-    path: ./ruleset/SteamCN.list
+  Custom_Proxy_IP:
+    type: http
+    behavior: ipcidr
+    interval: 86400
+    format: mrs
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_IP.mrs
+    path: ./ruleset/Custom_Proxy_IP.mrs
 
-  AiSuite:
+  PortDirect:
     <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/dler-io/Rules/refs/heads/main/Surge/Surge%203/Provider/AI%20Suite.list
-    path: ./ruleset/AiSuite.list
-
-  Microsoft:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.list
-    path: ./ruleset/Microsoft.list
-
-  Apple:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple.list
-    path: ./ruleset/Apple.list
-
-  Google:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.list
-    path: ./ruleset/Google.list
-
-  GitHub:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub.list
-    path: ./ruleset/GitHub.list
-
-  Telegram:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.list
-    path: ./ruleset/Telegram.list
-
-  YouTube:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.list
-    path: ./ruleset/YouTube.list
-
-  TikTok:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/TikTok/TikTok.list
-    path: ./ruleset/TikTok.list
-
-  BiliBiliHMT:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list
-    path: ./ruleset/BiliBiliHMT.list
-  
-  BiliBiliBM:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/BiliBili/BiliBili.list
-    path: ./ruleset/BiliBiliBM.list
-
-  Proxy:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Proxy/Proxy.list
-    path: ./ruleset/Proxy.list
-
-  Scholar:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Scholar/Scholar.list
-    path: ./ruleset/Scholar.list
-
-  Direct:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Direct/Direct.list
-    path: ./ruleset/Direct.list
-
-  China:
-    <<: *RuleSetClassical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/China/China.list
-    path: ./ruleset/China.list
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml
+    path: ./ruleset/PortDirect.yaml
 
 # 路由规则
 rules:
-# 局域网及个人最高优先级覆盖（必须放在最前）
-- RULE-SET,Lan,🎯 全球直连
+# 私有域名及IP
+- GEOSITE,private,🎯 全球直连
+- GEOIP,private,🎯 全球直连,no-resolve
 
-# 境内高频下载与特例服务直连（防止被后续的 Proxy 规则捕获）
-- RULE-SET,Download,🎯 全球直连
-- RULE-SET,GoogleCN,🎯 全球直连
-- RULE-SET,SteamCN,🎯 全球直连
+# 自定义规则
+- RULE-SET,Custom_Direct_Domain,🎯 全球直连
+- RULE-SET,Custom_Direct_IP,🎯 全球直连,no-resolve
+- RULE-SET,Custom_Proxy_Domain,✈️ 起飞选择
+- RULE-SET,Custom_Proxy_IP,✈️ 起飞选择,no-resolve
 
-# 指定服务及平台精准分流（必须放在 Proxy 泛用规则之前）
-- RULE-SET,AiSuite,💬 Ai平台  - RULE-SET,Microsoft,🪟 微软服务
-- RULE-SET,Apple,🍎 苹果服务
-- RULE-SET,Google,✈️ 起飞选择
-- RULE-SET,GitHub,✈️ 起飞选择
-- RULE-SET,Telegram,📲 电报消息
-- RULE-SET,YouTube,📹 油管视频
-- RULE-SET,TikTok,🎵 TikTok
+# 精准应用分流
+- GEOSITE,openai,💬 Ai平台
+- GEOSITE,category-ai-!cn,💬 Ai平台
+- GEOSITE,github,✈️ 起飞选择
+- GEOSITE,YouTube,📹 油管视频
+- GEOSITE,category-games@cn,🎯 全球直连
+- GEOSITE,category-games,🎮 游戏平台
+- GEOSITE,apple,🍎 苹果服务
+- GEOSITE,microsoft,🪟 微软服务
+- GEOSITE,telegram,📲 电报消息
+- GEOSITE,tiktok,🎵 TikTok
+- GEOSITE,bilibili,📺 哔哩哔哩
+- GEOSITE,category-scholar-!cn,🎓 学术平台
+- GEOSITE,google,✈️ 起飞选择
+- GEOIP,google,✈️ 起飞选择,no-resolve
+- GEOIP,telegram,📲 电报消息,no-resolve
 
-# 哔哩哔哩分流
-- RULE-SET,BiliBiliHMT,📺 哔哩哔哩
-- RULE-SET,BiliBiliBM,🎯 全球直连
+# GFW 列表的域名走代理
+- GEOSITE,gfw,✈️ 起飞选择
+# 非中国大陆域名走代理
+- GEOSITE,geolocation-!cn,✈️ 起飞选择
 
-# 广泛的代理规则兜底
-- RULE-SET,Proxy,✈️ 起飞选择
-  
-- RULE-SET,Scholar,🎓 学术平台
+# GEO中国大陆直连兜底
+- GEOSITE,cn,🎯 全球直连
+- GEOIP,CN,🎯 全球直连,no-resolve
 
-# 中国大陆域名及直连兜底
-- RULE-SET,Direct,🎯 全球直连
-- RULE-SET,China,🎯 全球直连
+# 端口拦截
+# 非标端口分流拦截放这里，确保只有常规网页端口漏网后才触发
+- RULE-SET,PortDirect,🔀 非标端口
 
-# 🎯 全球直连 - GEOIP CN
-- GEOIP,CN,🎯 全球直连
-  
-# 🐟 漏网之鱼 - Final
+# 最终兜底
 - MATCH,🐟 漏网之鱼
