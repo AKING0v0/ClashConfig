@@ -2,11 +2,11 @@
 
 ## 自定义 Mihomo 配置文件
 https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Clash_Config.yaml  
-配置文件修改自 [Aethersailor](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/yaml/Custom_Clash.yaml)
+配置修改自 [Aethersailor](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/yaml/Custom_Clash.yaml)
 
 核心分流规则基于 [Loyalsoldier](https://github.com/loyalsoldier/v2ray-rules-dat) 的 geosite 和 geoip 数据库，并采用 ⁠.mrs⁠ 二进制格式。这种方式摒弃了传统的 ⁠classical⁠ 匹配模式，有效降低了系统的解析开销，显著提升了路由分流的运行速度与整体性能。
 
-如果想用传统方式分流可参考下面的覆写配置文件。
+若用传统方式分流可参考下面的覆写配置文件。
 
 ## 自定义 Mihomo 覆写配置文件
 https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Override_Config.yaml
