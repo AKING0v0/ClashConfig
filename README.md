@@ -4,9 +4,9 @@
 https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Clash_Config.yaml  
 配置文件修改自[Aethersailor](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/yaml/Custom_Clash.yaml)
 
-主要运用了geosite和geoip数据库及mrs二进制文件做分流规则，避免使用behavior为classcial，提高了性能及速度。
+主要运用了[Loyalsoldier](https://github.com/loyalsoldier/v2ray-rules-dat)的geosite和geoip数据库，以及使用mrs二进制文件做分流规则，避免使用classcial的behavior，提高了性能及速度。
 
-如果想用传统方式分流参考下面的覆写配置文件。
+如果想用传统方式分流可参考下面的覆写配置文件。
 
 ## 自定义Mihomo覆写配置文件
 https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Override_Config.yaml
