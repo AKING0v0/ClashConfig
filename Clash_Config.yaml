@@ -425,7 +425,7 @@ rules:
 - GEOSITE,category-games@cn,🎯 全球直连
 - GEOSITE,category-games,🎮 游戏平台
 - GEOSITE,github,✈️ 起飞选择
-- GEOSITE,YouTube,📹 油管视频
+- GEOSITE,youtube,📹 油管视频
 - GEOSITE,apple,🍎 苹果服务
 - GEOSITE,microsoft,🪟 微软服务
 - GEOSITE,tiktok,🎵 TikTok
@@ -443,7 +443,7 @@ rules:
 
 # GEO中国大陆直连兜底
 - GEOSITE,cn,🎯 全球直连
-- GEOIP,CN,🎯 全球直连,no-resolve
+- GEOIP,cn,🎯 全球直连,no-resolve
 
 # 端口拦截
 # 非标端口分流拦截放这里，确保只有常规网页端口漏网后才触发
