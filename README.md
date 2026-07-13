@@ -11,7 +11,7 @@ https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Clash_Con
 ## 自定义 Mihomo 覆写配置文件
 https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/Override_Config.yaml
 
-配置修改自 [ACL4SSR](https://git.moezx.cc/mashiro/ACL4SSR/raw/branch/master/Clash/config/ACL4SSR_Online_Full.ini) 与 [zsokami](https://raw.githubusercontent.com/zsokami/ACL4SSR/main/ACL4SSR_Online_Full_Mannix.ini)
+配置修改自 [ACL4SSR](https://git.moezx.cc/mashiro/ACL4SSR/raw/branch/master/Clash/config/ACL4SSR_Online_Full.ini)
 
 ## 自定义 订阅转换 配置转换 规则转换 的远程配置
 https://raw.githubusercontent.com/AKING0v0/ClashConfig/refs/heads/main/SubConv_Config.ini  
