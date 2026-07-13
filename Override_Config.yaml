@@ -1,7 +1,7 @@
-# AKING0v0的「Clash_Config」Mihomo配置
+# AKING0v0的「Clash_Config」Mihomo覆写配置
 # 现配置作者：https://github.com/AKING0v0
 # 原配置作者：https://github.com/Aethersailor
-# 适用版本：所有使用 Mihomo (Meta) 内核的程序，OpenClash使用按需修改
+# 适用版本：所有使用 Mihomo (Meta) 内核的程序
 
 # 全局网络与基础设置
 port: 7890
@@ -128,13 +128,9 @@ dns:
   - "*.icitymobile.mobi"
   - "*.10099.com.cn"
   - "*.pingan.com.cn"
-  - "*.cmbchina.com"
   - "+.cmbchina.com"
   - "+.cmbimg.com"
   - "*.microdone.cn"
-  - localhost.*.weixin.qq.com
-  - localhost.ptlogin2.qq.com
-  - localhost.sec.qq.com
   - "+.qq.com"
   - "+.tencent.com"
   - mesu.apple.com
@@ -143,7 +139,20 @@ dns:
   - swdownload.apple.com
   - swcdn.apple.com
   - swdist.apple.com
-  - "+.pub.3gppnetwork.org"
+  - stun.l.google.com
+  - lens.l.google.com
+  - na.b.g-tun.com
+  - "+.mi.com"
+  - "+.xiaomi.com"
+  - "+.xiaomi.net"
+  - "+.music.163.com"
+  - "*.126.net"
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - "*.kuwo.cn"
+  - "*.mcdn.bilivideo.cn"
+  - "+.nflxvideo.net"
+  - "+.media.dssott.com"
   - "*.blzstatic.cn"
   - "+.battle.net"
   - "+.battlenet.com.cn"
@@ -152,7 +161,6 @@ dns:
   - "+.wowsgame.cn"
   - "+.wargaming.net"
   - "+.srv.nintendo.net"
-  - "*.n.n.srv.nintendo.net"
   - "+.cdn.nintendo.net"
   - "+.stun.playstation.net"
   - xbox.*.*.microsoft.com
@@ -161,32 +169,6 @@ dns:
   - xnotify.xboxlive.com
   - "+.uu.163.com"
   - ps.res.netease.com
-  - music.163.com
-  - "*.music.163.com"
-  - "*.126.net"
-  - songsearch.kugou.com
-  - trackercdn.kugou.com
-  - "*.kuwo.cn"
-  - y.qq.com
-  - "*.y.qq.com"
-  - streamoc.music.tc.qq.com
-  - mobileoc.music.tc.qq.com
-  - isure.stream.qqmusic.qq.com
-  - dl.stream.qqmusic.qq.com
-  - aqqmusic.tc.qq.com
-  - amobile.music.tc.qq.com
-  - "*.mcdn.bilivideo.cn"
-  - "+.nflxvideo.net"
-  - "+.media.dssott.com"
-  - global.turn.twilio.com
-  - global.stun.twilio.com
-  - stun.l.google.com
-  - stun.*.*
-  - stun.*.*.*
-  - "+.stun.*.*"
-  - "+.stun.*.*.*"
-  - "+.stun.*.*.*.*"
-  - "+.stun.*.*.*.*.*"
   - "+.sandai.net"
   - "+.n0808.com"
   - time.*.com
@@ -212,14 +194,17 @@ dns:
   - "*.time.edu.cn"
   - "*.ntp.org.cn"
   - "+.pool.ntp.org"
-  - time1.cloud.tencent.com
-  - lens.l.google.com
-  - na.b.g-tun.com
+  - stun.*.*
+  - stun.*.*.*
+  - "+.stun.*.*"
+  - "+.stun.*.*.*"
+  - "+.stun.*.*.*.*"
+  - "+.stun.*.*.*.*.*"
+  - global.turn.twilio.com
+  - global.stun.twilio.com
+  - "+.pub.3gppnetwork.org"
   - injections.adguard.org
   - local.adguard.org
-  - "+.mi.com"
-  - "+.xiaomi.com"
-  - "+.xiaomi.net"
   respect-rules: false
   fake-ip-filter-mode: blacklist
 
