@@ -15,6 +15,8 @@ log-level: info
 ipv6: false
 tcp-concurrent: true
 unified-delay: true
+# 进程匹配模式（OpenClash 环境下设为 off）
+find-process-mode: strict
 
 # 面板与外部控制
 external-controller: 0.0.0.0:9090
@@ -28,6 +30,8 @@ geox-url:
 geo-auto-update: true
 geo-update-interval: 24
 geodata-mode: true
+# GeoData 加载模式（内存容量有限路由器应设为 memconservative）
+geodata-loader: standard
 
 profile:
   store-selected: true
@@ -90,8 +94,8 @@ dns:
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
   nameserver:
-  - https://223.5.5.5/dns-query
-  - https://1.12.12.12/dns-query
+  - https://dns.alidns.com/dns-query
+  - https://doh.pub/dns-query
   default-nameserver:
   - 223.5.5.5
   - 119.29.29.29
@@ -132,7 +136,14 @@ dns:
   - "+.cmbimg.com"
   - "*.microdone.cn"
   - "+.qq.com"
-  - "+.tencent.com"
+  - "+.weixin.com"
+  - "+.weixin.qq.com"
+  - "+.wechat.com"
+  - "+.qlogo.cn"
+  - "+.qpic.cn"
+  - "+.servicewechat.com"
+  - "+.tenpay.com"
+  - "+.wechatpay.cn"
   - mesu.apple.com
   - swscan.apple.com
   - swquery.apple.com
@@ -205,6 +216,7 @@ dns:
   - "+.pub.3gppnetwork.org"
   - injections.adguard.org
   - local.adguard.org
+  - "+.tencent.com"
   respect-rules: false
   fake-ip-filter-mode: blacklist
 
