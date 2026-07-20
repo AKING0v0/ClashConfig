@@ -50,7 +50,7 @@ tun:
   # 自动配置 iptables 重定向（OpenClash 环境下设为 false）
   auto-redirect: true
   # 严格路由模式（OpenClash 环境下应设为 false）
-  strict-route: true
+  strict-route: false
   disable-icmp-forwarding: false
 
 # 流量嗅探设置
@@ -137,12 +137,6 @@ dns:
   - "+.qq.com"
   - "+.weixin.com"
   - "+.weixin.qq.com"
-  - "+.wechat.com"
-  - "+.qlogo.cn"
-  - "+.qpic.cn"
-  - "+.servicewechat.com"
-  - "+.tenpay.com"
-  - "+.wechatpay.cn"
   - mesu.apple.com
   - swscan.apple.com
   - swquery.apple.com
