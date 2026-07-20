@@ -51,7 +51,7 @@ tun:
   # 自动配置 iptables 重定向（OpenClash 环境下设为 false）
   auto-redirect: true
   # 严格路由模式（OpenClash 环境下应设为 false）
-  strict-route: false
+  strict-route: true
   disable-icmp-forwarding: false
 
 # 流量嗅探设置
