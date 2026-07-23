@@ -209,7 +209,6 @@ dns:
   - "+.pub.3gppnetwork.org"
   - injections.adguard.org
   - local.adguard.org
-  - "+.tencent.com"
   respect-rules: false
   fake-ip-filter-mode: blacklist
 
